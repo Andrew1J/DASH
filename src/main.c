@@ -4,8 +4,13 @@
 #include <unistd.h>
 #include "parse.h"
 #include "run.h"
+#include "command.h"
+
+void tests();
 
 int main () {
+	tests();
+
 	char input[100]; // TODO: make it expand to the input size
 	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
 
@@ -22,4 +27,9 @@ int main () {
 	}
 
     return 0;
+}
+
+
+void tests() {
+	command_tests();
 }
