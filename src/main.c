@@ -9,7 +9,7 @@
 void tests();
 
 int main () {
-	tests();
+	// tests();
 
 	char input[100]; // TODO: make it expand to the input size
 	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
@@ -18,19 +18,17 @@ int main () {
 		getcwd(cwd, 4096);
 		printf("%s $ ", cwd);
 
-        char * input = read_line();
-        // fgets(input, sizeof(input), stdin);
-		// input[strlen(input) - 1] = '\0';
+        char *input;
+        input = read_line();
+        printf("%s\n", input);  // just echo it for now
+        char ** args = parse_args( input );
 
-        printf("%d\n", num_args(input));
 
-        // printf("%s\n", input);
-		// fgets(input, sizeof(input), stdin);
-		// input[strlen(input) - 1] = '\0';  // remove trailing newline
-        //
+
+        execvp(args[0], args);
+
 		if (strcmp(input, "exit") == 0) break;
-        //
-		// printf("%s\n", input);  // just echo it for now
+
 	}
 
     return 0;

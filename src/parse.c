@@ -28,6 +28,7 @@ int num_args(char * line) {
 }
 
 char ** parse_args( char * line ) {
+    printf("%s\n", i);
     char *curr = line;
     char *token;
     int cnt = num_args(line);
