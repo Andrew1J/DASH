@@ -43,3 +43,29 @@ int do_shell_cmd(char **args) {
     printf("DASH: Command is not a shell command\n");
     return 1;
 }
+
+void run_tests() {
+    printf("\n\nrun.c Tests:\n");
+
+    char *exit_args[] = {"exit"};
+    printf("exit: %d\n", is_shell_cmd(exit_args));
+    
+    char *cd_args[] = {"cd", ".."};
+    printf("cd ..: %d\n", is_shell_cmd(cd_args));
+
+    char *bruh_args[] = {"bruh", "what"};
+    printf("bruh what: %d\n", is_shell_cmd(bruh_args));
+
+    char cwd[4096];
+    getcwd(cwd, 4096);
+    printf("\n%s$ ", cwd);
+
+    printf("\nRunning cd ..\n");
+    if (is_shell_cmd(cd_args)) do_shell_cmd(cd_args);
+
+    getcwd(cwd, 4096);
+    printf("%s$ ", cwd);
+
+    printf("\n\nRunning exit\n");
+    if (is_shell_cmd(exit_args)) do_shell_cmd(exit_args);
+}

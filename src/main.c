@@ -32,4 +32,5 @@ int main () {
 
 void tests() {
 	command_tests();
+	run_tests();
 }
