@@ -16,14 +16,21 @@ int main () {
 
 	while (1) {
 		getcwd(cwd, 4096);
-		printf("%s$ ", cwd);
-	
-		fgets(input, sizeof(input), stdin);
-		input[strlen(input) - 1] = '\0';  // remove trailing newline
+		printf("%s $ ", cwd);
 
+        char * input = read_line();
+        // fgets(input, sizeof(input), stdin);
+		// input[strlen(input) - 1] = '\0';
+
+        printf("%d\n", num_args(input));
+
+        // printf("%s\n", input);
+		// fgets(input, sizeof(input), stdin);
+		// input[strlen(input) - 1] = '\0';  // remove trailing newline
+        //
 		if (strcmp(input, "exit") == 0) break;
-		
-		printf("%s\n", input);  // just echo it for now
+        //
+		// printf("%s\n", input);  // just echo it for now
 	}
 
     return 0;
