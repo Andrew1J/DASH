@@ -56,7 +56,7 @@ int do_shell_cmd(char **args) {
             int pid = wait(&status);
         }
     }
-    
+
     return 1;
 }
 
