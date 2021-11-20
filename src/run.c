@@ -40,7 +40,7 @@ int do_shell_cmd(char **args) {
     else if (strcmp(name, "cd") == 0) {
         int result = chdir(args[1]);
         if (result) {
-            printf("DASH: %s\n", strerror(errno));
+            printf("dash: %s\n", strerror(errno));
             return result;
         }
         return 0;
@@ -59,7 +59,7 @@ int run_command(char **args) {
     int f = fork();
 
     if (!f) {
-        execvp(args[0],args);
+        execvp(args[0], args);
         return 0;
     } else {
         int status;

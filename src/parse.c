@@ -13,6 +13,11 @@
 char * read_line() {
     char *input = malloc(500 * sizeof(char));
 
+    if (!input) {
+        printf("dash: could not allocate memory for user input\n");
+        exit(EXIT_FAILURE);
+    }
+
     fgets(input, 500, stdin);
 
     input[strlen(input) - 1] = '\0';
