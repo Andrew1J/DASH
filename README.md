@@ -7,18 +7,18 @@ Launch Codes
 
 * Clone the Repository
 ```
-$ git clone https://github.com/Andrew1J/DASH.git
+git clone https://github.com/Andrew1J/DASH.git
 ```
 * Change Directories 
 ```
-$ cd DASH
+cd DASH
 ```
 * Run the App
 ```
-$ make
+make
 ```
 ```
-$ make run
+make run
 ```
 
 ## Description
