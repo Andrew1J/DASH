@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
 #include <errno.h>
 #include "run.h"
 
@@ -45,20 +46,25 @@ int do_shell_cmd(char **args) {
         return 0;
     }
 
-    // move to run_command()
-    else {
-        int f = fork();
-
-        if (!f) {
-            execvp(args[0],args);
-            return 0;
-        } else {
-            int status;
-            int pid = wait(&status);
-        }
-    }
-
     return 1;
+}
+
+/**
+ * Takes in a regular command and executes it
+ *
+ * @param args Array of arguments
+ * @return 0 on success and other values on failure
+ */
+int run_command(char **args) {
+    int f = fork();
+
+    if (!f) {
+        execvp(args[0],args);
+        return 0;
+    } else {
+        int status;
+        int pid = wait(&status);
+    }
 }
 
 void run_tests() {

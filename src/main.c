@@ -8,7 +8,7 @@
 
 void tests();
 
-int main () {
+int main(int argc, char *argv[]) {
 	// tests();
 
 	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
@@ -21,20 +21,23 @@ int main () {
         // Read in line from STDIN
         char *input = read_line();
 
-        // Parse the args from input
+        // Parse the commands from input
         // TODO: will have to trim whitespace later
-        char **args = parse_args(input, ';');
+        char **commands = parse_args(input, ';');
 
         // Execute commands
         int i = 0;
-        while(args[i]) {
-            char **cmds = parse_args(args[i], ' ');
-            do_shell_cmd(cmds);
+        while (commands[i]) {
+            char **args = parse_args(commands[i], ' ');
+
+            if (is_shell_cmd(args)) {
+                do_shell_cmd(args);
+            } else {
+                run_command(args);
+            }
+
             i++;
         }
-
-        // Exit shell
-		if (strcmp(input, "exit") == 0) break;
 	}
 
     return 0;
@@ -44,4 +47,6 @@ int main () {
 void tests() {
 	command_tests();
 	run_tests();
+
+    exit(0);
 }

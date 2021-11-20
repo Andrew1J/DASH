@@ -11,9 +11,9 @@
  * @note Still need to implement multiple commands + redirection and piping
  */
 char * read_line() {
-    char *input = malloc(100 * sizeof(char));
+    char *input = malloc(500 * sizeof(char));
 
-    fgets(input, 100, stdin);
+    fgets(input, 500, stdin);
 
     input[strlen(input) - 1] = '\0';
     return input;
@@ -56,6 +56,6 @@ int num_args(char * line, char ch) {
         if (line[i] == ch) num_args++;
         i++;
     }
-    
+
     return num_args;
 }
