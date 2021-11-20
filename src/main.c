@@ -23,12 +23,12 @@ int main () {
 
         // Parse the args from input
         // TODO: will have to trim whitespace later
-        char ** args = parse_args(input, ';');
+        char **args = parse_args(input, ';');
 
         // Execute commands
-        int i=0;
+        int i = 0;
         while(args[i]) {
-            char ** cmds = parse_args(args[i], ' ');
+            char **cmds = parse_args(args[i], ' ');
             do_shell_cmd(cmds);
             i++;
         }

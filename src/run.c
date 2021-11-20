@@ -8,8 +8,8 @@
 /**
  * Determines if the given argument is a shell command
  *
- * @param An array of Strings
- * @return 1 if it is a shell cmd and 0 if it isn't
+ * @param args Array of arguments
+ * @return 1 if true, 0 if false
  */
 int is_shell_cmd(char **args) {
     char *name = args[0];
@@ -26,7 +26,7 @@ int is_shell_cmd(char **args) {
 /**
  * Takes in a shell command and executes them
  *
- * @param An array of Strings
+ * @param args Array of arguments
  * @return 0 on success and other values on failure
  */
 int do_shell_cmd(char **args) {
@@ -45,6 +45,7 @@ int do_shell_cmd(char **args) {
         return 0;
     }
 
+    // move to run_command()
     else {
         int f = fork();
 
