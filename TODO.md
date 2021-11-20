@@ -3,3 +3,4 @@
  * Comments and documentation
 
 # Proposals
+ * Colors!
