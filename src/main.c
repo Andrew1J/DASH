@@ -26,7 +26,8 @@ int main () {
         char ** args = parse_args( input );
 
         // Execute commands
-        execvp(args[0], args);
+        do_shell_cmd(args);
+        //execvp(args[0], args);
 
         // Exit shell
 		if (strcmp(input, "exit") == 0) break;

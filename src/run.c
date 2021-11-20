@@ -5,9 +5,12 @@
 #include <errno.h>
 #include "run.h"
 
-// Takes in an array of strings
-// and determines if the command
-// is a shell command
+/**
+ * Determines if the given argument is a shell command
+ *
+ * @param An array of Strings
+ * @return 1 if it is a shell cmd and 0 if it isn't
+ */
 int is_shell_cmd(char **args) {
     char *name = args[0];
 
@@ -20,17 +23,19 @@ int is_shell_cmd(char **args) {
     else return 0;
 }
 
-// Takes in a shell command (exit, cd)
-// and executes them.
-//
-// Returns 0 on success, other values
-// on failure.
+/**
+ * Takes in a shell command and executes them
+ *
+ * @param An array of Strings
+ * @return 0 on success and other values on failure
+ */
 int do_shell_cmd(char **args) {
     char *name = args[0];
 
     if (strcmp(name, "exit") == 0) {
         exit(0);
     }
+
     else if (strcmp(name, "cd") == 0) {
         int result = chdir(args[1]);
         if (result) {
@@ -39,8 +44,19 @@ int do_shell_cmd(char **args) {
         }
         return 0;
     }
+
+    else {
+        int f = fork();
+
+        if (!f) {
+            execvp(args[0],args);
+            return 0;
+        } else {
+            int status;
+            int pid = wait(&status);
+        }
+    }
     
-    printf("DASH: Command is not a shell command\n");
     return 1;
 }
 
@@ -49,7 +65,7 @@ void run_tests() {
 
     char *exit_args[] = {"exit"};
     printf("exit: %d\n", is_shell_cmd(exit_args));
-    
+
     char *cd_args[] = {"cd", ".."};
     printf("cd ..: %d\n", is_shell_cmd(cd_args));
 
