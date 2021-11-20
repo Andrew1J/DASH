@@ -1,4 +1,5 @@
 # TODO
+ * FIX BUG where input line is terminated incorrectly for some reason (ls -a sometimes displays ls instead of ls -a)
  * Move line reading to a separate function
     * Dynamically resize input buffer
  * Comments and documentation
