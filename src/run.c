@@ -58,14 +58,25 @@ int do_shell_cmd(char **args) {
 int run_command(char **args) {
     int f = fork();
 
-    if (!f) {
+    if (f < 0) {  // error
+        printf("dash: couldn't fork! %s\n", strerror(errno));
+        return errno;
+    } 
+    else if (f > 0) {  // parent
+        int status;
+        int pid = wait(&status);
+
+        if (WIFEXITED(status)) {
+            return WEXITSTATUS(status);
+        }
+        
+        return -1;
+    } 
+    else {  // child
         if (execvp(args[0], args)) {
         	printf("dash: %s\n", strerror(errno));
         }
-        exit(0);
-    } else {
-        int status;
-        int pid = wait(&status);
+        exit(errno);
     }
 }
 
