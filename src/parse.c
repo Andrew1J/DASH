@@ -64,3 +64,13 @@ int num_args(char * line, char ch) {
 
     return num_args;
 }
+
+/**
+ * Takes in a line and removes whitespace
+ *
+ * @param line pointer to a string
+ * @return line pointer to string without spaces
+ */
+int remove_spaces(char * line) {
+    return 0;
+}
