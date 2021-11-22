@@ -1,4 +1,4 @@
-## ![DASH](https://i.imgur.com/j3yIxXB.gif) 
+# ![DASH](https://i.imgur.com/j3yIxXB.gif) 
 (**D**ylan and **A**ndrew's **SH**ell) <br>
 This project is an implementation of a shell in C for Systems. 
 
@@ -14,20 +14,19 @@ git clone https://github.com/Andrew1J/DASH.git
 ```
 cd DASH
 ```
-* Run the App
+* Compile using make
 ```
 make
 ```
-```
-make run
-```
+* Run DASH using make, or by running the binary directly
+
+`make run` or `./bin/dash`
 
 ## Description
+### Features Our Shell Implements
 
-Features Our Shell Implements
+### Attempted Features
 
-Attempted Features
+### Bugs
 
-Bugs
-
-Function Headers
+### Function Headers
