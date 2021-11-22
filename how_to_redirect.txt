@@ -1,0 +1,12 @@
+For example:
+"ls -la > test; cat < test >> test"
+
+First, split by ";":
+"ls -la > test"; "cat < test >> test"
+
+Then, split by "<>":
+"ls -la", ">", "test"; "cat", "<", "test", ">>", "test"
+
+Then, look for "<>", if found replace stdin/stdout for the command to the left by the argument on the right, assuming files are always on the right. Keep pointers to the actual commands, since the example of < >>, the command is cat, not test.
+After, split args
+Finally, execute from left to right
