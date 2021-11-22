@@ -11,7 +11,7 @@
  * @note Still need to implement multiple commands + redirection and piping
  */
 char * read_line() {
-    char *input = malloc(500 * sizeof(char));
+    char *input = calloc(500, sizeof(char));
 
     if (!input) {
         printf("dash: could not allocate memory for user input\n");
@@ -35,7 +35,7 @@ char ** parse_args(char * line, char ch) {
     char *curr = line;
     char *token;
     int cnt = num_args(line, ch);
-    char **args = malloc((cnt + 1) * sizeof(char *));
+    char **args = calloc((cnt + 1), sizeof(char *));
 
     int i = 0;
     while ((token = strsep(&curr, &ch))) {
