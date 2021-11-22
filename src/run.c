@@ -59,7 +59,9 @@ int run_command(char **args) {
     int f = fork();
 
     if (!f) {
-        execvp(args[0], args);
+        if (execvp(args[0], args)) {
+        	printf("dash: %s\n", strerror(errno));
+        }
         exit(0);
     } else {
         int status;
