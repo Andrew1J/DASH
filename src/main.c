@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	while (1) {
         // Print prompt
 		getcwd(cwd, 4096);
-		printf("%s" RED " >" RESET YEL ">" RESET BLU "> " RESET, cwd);
+		printf("%s" RED " >" RESET GRN ">" RESET BLU "> " RESET, cwd);
 
         // Read in line from STDIN
         char *input = read_line();
@@ -44,9 +44,13 @@ int main(int argc, char *argv[]) {
             } else {
                 run_command(args);
             }
-
+			
+			free(args);
             i++;
         }
+
+		free(input);
+		free(commands);
 	}
 
     return 0;
