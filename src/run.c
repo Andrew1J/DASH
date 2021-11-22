@@ -60,7 +60,7 @@ int run_command(char **args) {
 
     if (!f) {
         execvp(args[0], args);
-        return 0;
+        exit(0);
     } else {
         int status;
         int pid = wait(&status);
