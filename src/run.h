@@ -3,6 +3,8 @@
 
 void dash_loop();
 
+void print_prompt(); 
+
 int is_shell_cmd(char **args);
 int do_shell_cmd(char **args);
 
