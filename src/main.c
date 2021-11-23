@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
 #include "parse.h"
 #include "run.h"
 #include "command.h"
@@ -29,6 +30,21 @@ int main(int argc, char *argv[]) {
         // Execute commands
         int i = 0;
         while (commands[i]) {
+        	// duplicate stdin, stdout for later
+        	int backup_stdin = dup(STDIN_FILENO);
+        	if (backup_stdin < 0) {
+        		printf("dash: couldn't duplicate stdin, %s\n", strerror(errno));
+        		exit(errno);
+        	}
+        	int backup_stdout = dup(STDOUT_FILENO);
+        	if (backup_stdout < 0) {
+        		printf("dash: couldn't duplicate stdout, %s\n", strerror(errno));
+        		exit(errno);
+        	}
+
+        	// parse by redir here
+        	// do the redirs here
+        	
             char **args = parse_args(commands[i], ' ');
 
             if (is_shell_cmd(args)) {
@@ -36,6 +52,10 @@ int main(int argc, char *argv[]) {
             } else {
                 run_command(args);
             }
+
+			// done executing, put stdin stdout back
+            dup2(backup_stdout, STDOUT_FILENO);
+            dup2(backup_stdin, STDIN_FILENO);
 			
 			free(args);
             i++;
