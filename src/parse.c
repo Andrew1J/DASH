@@ -74,3 +74,17 @@ int num_args(char * line, char ch) {
 int remove_spaces(char * line) {
     return 0;
 }
+
+/**
+ * Takes in an array of arguments and sets up redirects
+ * 
+ * @param args pointer to an array of strings
+ * @return 0 if successful, other values on failure
+ */
+int do_redirs(char **args) {
+	// loop thru args
+	// if arg is "<>"
+	// do redirection
+	
+	return 0;
+}
