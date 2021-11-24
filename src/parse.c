@@ -121,6 +121,8 @@ int do_redirs(char **args) {
             if (dup2_result < 0) {
                 printf("dash: couldn't replace stdin, %s\n", strerror(errno));
             }
+
+            args[i] = NULL;
         }
         else if (!strcmp(args[i], ">")) {
             int file = open(args[i + 1], O_WRONLY | O_CREAT, 0644);
@@ -133,6 +135,8 @@ int do_redirs(char **args) {
             if (dup2_result < 0) {
                 printf("dash: couldn't replace stdout, %s\n", strerror(errno));
             }
+
+            args[i] = NULL;
         }
         else if (!strcmp(args[i], ">>")) {
             int file = open(args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -145,6 +149,8 @@ int do_redirs(char **args) {
             if (dup2_result < 0) {
                 printf("dash: couldn't replace stdout, %s\n", strerror(errno));
             }
+
+            args[i] = NULL;
         }
     }
 

@@ -43,12 +43,10 @@ int main(int argc, char *argv[]) {
 
 			// parse the redirs
 			char **args = parse_args(commands[i],' ');
-			// int redirs = do_redirs(parse_redirs);
-			// if (redirs) {  // failed to redirect at one point or another
-			// 	break;  // just stop executing and reprompt
-			// }
-
-			// char **args = parse_args(parsed_redirs[0], ' ');
+			int redirs = do_redirs(args);
+			if (redirs) {  // failed to redirect at one point or another
+				break;  // just stop executing and reprompt
+			}
 
 			if (is_shell_cmd(args)) {
 				do_shell_cmd(args);
