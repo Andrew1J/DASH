@@ -125,7 +125,7 @@ int do_redirs(char **args) {
             args[i] = NULL;
         }
         else if (!strcmp(args[i], ">")) {
-            int file = open(args[i + 1], O_WRONLY | O_CREAT, 0644);
+            int file = open(args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
             if (file < 0) {
                 printf("dash: failed to redirect stdout, %s\n", strerror(errno));
                 return errno;
