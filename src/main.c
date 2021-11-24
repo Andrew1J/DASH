@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 
 		// Parse the commands from input
 		// TODO: will have to trim whitespace later
-		char **commands = parse_args(input, ';');
+		char **commands = parse_tokens(input, ';');
 
 		// Execute commands
 		int i = 0;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 			}
 
 			// parse the redirs
-			char **args = parse_args(commands[i],' ');
+			char **args = parse_tokens(commands[i],' ');
 			int redirs = do_redirs(args);
 			if (redirs) {  // failed to redirect at one point or another
 				break;  // just stop executing and reprompt
@@ -72,33 +72,33 @@ int main(int argc, char *argv[]) {
 }
 
 
-void tests() {
-	char *redir_args[] = {"ls -l -a", ">", "ls_out", 0};
-	do_redirs(redir_args);
-	char *args[] = {"ls", "-l", "-a", 0};
-
-	int backup_stdin = dup(STDIN_FILENO);
-	if (backup_stdin < 0) {
-		printf("dash: couldn't duplicate stdin, %s\n", strerror(errno));
-		exit(errno);
-	}
-	int backup_stdout = dup(STDOUT_FILENO);
-	if (backup_stdout < 0) {
-		printf("dash: couldn't duplicate stdout, %s\n", strerror(errno));
-		exit(errno);
-	}
-
-	run_command(args);
-
-	int rst_redir = reset_redirs(backup_stdin, backup_stdout);
-	if (rst_redir) {
-		exit(rst_redir);
-	}
-
-	exit(0);
-
-	command_tests();
-	run_tests();
-
-	exit(0);
-}
+// void tests() {
+// 	char *redir_args[] = {"ls -l -a", ">", "ls_out", 0};
+// 	do_redirs(redir_args);
+// 	char *args[] = {"ls", "-l", "-a", 0};
+//
+// 	int backup_stdin = dup(STDIN_FILENO);
+// 	if (backup_stdin < 0) {
+// 		printf("dash: couldn't duplicate stdin, %s\n", strerror(errno));
+// 		exit(errno);
+// 	}
+// 	int backup_stdout = dup(STDOUT_FILENO);
+// 	if (backup_stdout < 0) {
+// 		printf("dash: couldn't duplicate stdout, %s\n", strerror(errno));
+// 		exit(errno);
+// 	}
+//
+// 	run_command(args);
+//
+// 	int rst_redir = reset_redirs(backup_stdin, backup_stdout);
+// 	if (rst_redir) {
+// 		exit(rst_redir);
+// 	}
+//
+// 	exit(0);
+//
+// 	command_tests();
+// 	run_tests();
+//
+// 	exit(0);
+// }

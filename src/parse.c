@@ -34,7 +34,7 @@ char * read_line() {
  * @param ch delimiter to split the string by
  * @return An array of strings
  */
-char ** parse_args(char * line, char ch) {
+char ** parse_tokens(char * line, char ch) {
     char *curr = line;
     char *token;
     int cnt = num_args(line, ch);
@@ -88,16 +88,6 @@ char * remove_spaces(char * line) {
     // Add terminating null
     *(end+1) = '\0';
     return line;
-}
-
-/**
- * Takes in a line and splits it by spaces
- *
- * @param line pointer to a string
- * @return a pointer to an array of strings
- */
-char ** parse_redirs(char *line) {
-    
 }
 
 /**
