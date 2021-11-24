@@ -29,5 +29,6 @@ make
 ### Attempted Features
 
 ### Bugs
+- DON'T USE TABS :)
 
 ### Function Headers
