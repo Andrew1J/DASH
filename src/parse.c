@@ -168,3 +168,15 @@ int reset_redirs(int stdin, int stdout) {
 
     return 0;
 }
+
+/**
+ * Takes in an array of arguments and sets up pipes
+ *
+ * @param args pointer to an array of strings
+ * @return 0 if successful, other values on failure
+ * @note dup2 should close previously opened files, but it fails silently, so :/
+ */
+int do_pipes(char **args) {
+	int i;
+	return 0;
+}
