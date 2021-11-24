@@ -11,14 +11,13 @@
 void tests();
 
 int main(int argc, char *argv[]) {
-	//tests();
-
+	// tests();
+	
 	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
 
 	while (1) {
 		// Print prompt
-		getcwd(cwd, 4096);
-		printf("%s" RED " >" RESET GRN ">" RESET BLU "> " RESET, cwd);
+		print_prompt();
 
 		// Read in line from STDIN
 		char *input = read_line();
@@ -50,6 +49,7 @@ int main(int argc, char *argv[]) {
 			// }
 
 			// char **args = parse_args(parsed_redirs[0], ' ');
+
 			char **args = parse_args(commands[i], ' ');
 
 			if (is_shell_cmd(args)) {
@@ -63,6 +63,7 @@ int main(int argc, char *argv[]) {
 			if (rst_redir) {
 				exit(rst_redir);
 			}
+
 
 			free(args);
 			i++;
