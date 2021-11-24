@@ -9,5 +9,6 @@ char ** parse_args(char * line, char ch);
 
 char ** parse_redirs(char *command);
 int do_redirs(char **args);
+int reset_redirs(int stdin, int stdout);
 
 #endif
