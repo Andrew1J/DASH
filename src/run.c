@@ -61,7 +61,7 @@ int run_command(char **args) {
     if (f < 0) {  // error
         printf("dash: couldn't fork! %s\n", strerror(errno));
         return errno;
-    } 
+    }
     else if (f > 0) {  // parent
         int status;
         int pid = wait(&status);
@@ -69,9 +69,9 @@ int run_command(char **args) {
         if (WIFEXITED(status)) {
             return WEXITSTATUS(status);
         }
-        
+
         return -1;
-    } 
+    }
     else {  // child
         if (execvp(args[0], args)) {
         	printf("dash: %s\n", strerror(errno));
