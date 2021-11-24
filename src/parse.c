@@ -39,7 +39,7 @@ char ** parse_args(char * line, char ch) {
 
     int i = 0;
     while ((token = strsep(&curr, &ch))) {
-        args[i] = token;
+        args[i] = remove_spaces(token);
         i++;
     }
     args[cnt] = NULL;
@@ -69,8 +69,20 @@ int num_args(char * line, char ch) {
  * Takes in a line and removes whitespace
  *
  * @param line pointer to a string
- * @return line pointer to string without spaces
  */
-int remove_spaces(char * line) {
-    return 0;
+char * remove_spaces(char * line) {
+    // Remove from beginning
+    while (*line==' ' || *line=='\t') {
+        line++;
+    }
+
+    // Remove from end
+    char *end = line + strlen(line) - 1;
+    while(end > line && (*end == ' '||*end=='\t')) {
+        end--;
+    }
+
+    // Add terminating null
+    *(end+1) = '\0';
+    return line;
 }
