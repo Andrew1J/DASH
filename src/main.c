@@ -18,8 +18,8 @@ int main(int argc, char *argv[]) {
         // Print prompt
 		print_prompt();
 
-        // Read in line from STDIN
-        char *input = read_line();
+    	// Read in line from STDIN
+    	char *input = read_line();
 
         // Parse the commands from input
         // TODO: will have to trim whitespace later
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 		free(input);
 		free(commands);
 	}
-
+	
     return 0;
 }
 
