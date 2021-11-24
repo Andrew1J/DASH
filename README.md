@@ -24,7 +24,8 @@ make
 
 ## Description
 ### Features Our Shell Implements
-
+- Implemented trimming spaces and tabs from input
+- 
 ### Attempted Features
 
 ### Bugs
