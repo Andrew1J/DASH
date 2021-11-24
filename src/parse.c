@@ -91,18 +91,18 @@ char * remove_spaces(char * line) {
 }
 
 /**
- * Takes in a line and splits it by redirections
- * 
+ * Takes in a line and splits it by spaces
+ *
  * @param line pointer to a string
  * @return a pointer to an array of strings
  */
 char ** parse_redirs(char *line) {
-    ;
+    
 }
 
 /**
  * Takes in an array of arguments and sets up redirects
- * 
+ *
  * @param args pointer to an array of strings
  * @return 0 if successful, other values on failure
  * @note dup2 should close previously opened files, but it fails silently, so :/
@@ -147,13 +147,13 @@ int do_redirs(char **args) {
             }
         }
     }
-	
+
 	return 0;
 }
 
 /**
  * Resets stdin, stdout to backed up values
- * 
+ *
  * @param stdin file descriptor to replace stdin
  * @param stdout file descriptor to replace stdout
  * @returns 0 on success, other values on failure

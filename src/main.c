@@ -12,7 +12,7 @@ void tests();
 
 int main(int argc, char *argv[]) {
 	// tests();
-	
+
 	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
 
 	while (1) {
@@ -41,16 +41,14 @@ int main(int argc, char *argv[]) {
 				exit(errno);
 			}
 
-			// // parse the redirs
-			// char **parsed_redirs = parse_redirs(commands[i]);
+			// parse the redirs
+			char **args = parse_args(commands[i],' ');
 			// int redirs = do_redirs(parse_redirs);
 			// if (redirs) {  // failed to redirect at one point or another
 			// 	break;  // just stop executing and reprompt
 			// }
 
 			// char **args = parse_args(parsed_redirs[0], ' ');
-
-			char **args = parse_args(commands[i], ' ');
 
 			if (is_shell_cmd(args)) {
 				do_shell_cmd(args);
