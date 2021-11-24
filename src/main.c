@@ -5,7 +5,6 @@
 #include <errno.h>
 #include "parse.h"
 #include "run.h"
-#include "command.h"
 #include "term_colors.h"
 
 void tests();
