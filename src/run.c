@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <fcntl.h>
 #include "run.h"
 #include "term_colors.h"
 
@@ -85,6 +86,97 @@ int run_command(char **args) {
         }
         exit(errno);
     }
+}
+
+/**
+ * Takes in an array of arguments and sets up redirects
+ *
+ * @param args pointer to an array of strings
+ * @return 0 if successful, other values on failure
+ * @note dup2 should close previously opened files, but it fails silently, so :/
+ */
+int do_redirs(char **args) {
+	int i;
+    for (i = 0; args[i]; i++) {
+        if (!strcmp(args[i], "<")) {  // open file for reading
+            int file = open(args[i + 1], O_RDONLY);
+            if (file < 0) {
+                printf("dash: failed to redirect stdin, %s\n", strerror(errno));
+                return errno;
+            }
+
+            int dup2_result = dup2(file, STDIN_FILENO);
+            if (dup2_result < 0) {
+                printf("dash: couldn't replace stdin, %s\n", strerror(errno));
+            }
+
+            args[i] = NULL;
+        }
+        else if (!strcmp(args[i], ">")) {
+            int file = open(args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            if (file < 0) {
+                printf("dash: failed to redirect stdout, %s\n", strerror(errno));
+                return errno;
+            }
+
+            int dup2_result = dup2(file, STDOUT_FILENO);
+            if (dup2_result < 0) {
+                printf("dash: couldn't replace stdout, %s\n", strerror(errno));
+            }
+
+            args[i] = NULL;
+        }
+        else if (!strcmp(args[i], ">>")) {
+            int file = open(args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+            if (file < 0) {
+                printf("dash: failed to redirect stdout, %s\n", strerror(errno));
+                return errno;
+            }
+
+            int dup2_result = dup2(file, STDOUT_FILENO);
+            if (dup2_result < 0) {
+                printf("dash: couldn't replace stdout, %s\n", strerror(errno));
+            }
+
+            args[i] = NULL;
+        }
+    }
+
+	return 0;
+}
+
+/**
+ * Resets stdin, stdout to backed up values
+ *
+ * @param stdin file descriptor to replace stdin
+ * @param stdout file descriptor to replace stdout
+ * @returns 0 on success, other values on failure
+ */
+int reset_redirs(int stdin, int stdout) {
+    int dup2_result_out = dup2(stdout, STDOUT_FILENO);
+    if (dup2_result_out < 0) {
+        printf("dash: couldn't replace stdin, %s\n", strerror(errno));
+        return errno;
+    }
+    int dup2_result_in = dup2(stdin, STDIN_FILENO);
+    if (dup2_result_out < 0) {
+        printf("dash: couldn't replace stdout, %s\n", strerror(errno));
+        return errno;
+    }
+
+    return 0;
+}
+
+/**
+ * Takes in an array of arguments and sets up pipes
+ *
+ * @param args pointer to an array of strings
+ * @return 0 if successful, other values on failure
+ * @note dup2 should close previously opened files, but it fails silently, so :/
+ */
+int do_pipes(char **args) {
+	int i;
+	return 0;
 }
 
 void run_tests() {
