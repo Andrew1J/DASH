@@ -25,7 +25,11 @@ make
 ## Description
 ### Features Our Shell Implements
 - Implemented trimming spaces and tabs from input
-- 
+- Command-line argument to change prompt style
+  - Invoke dash with `--prompt-style <style>` where `<style>` is an integer from 0-2, inclusive
+  - Defaults to style 0
+  - Invalid inputs default to style 0
+
 ### Attempted Features
 
 ### Bugs
