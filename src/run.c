@@ -12,8 +12,18 @@
 void print_prompt() {
     char cwd[4096];
     getcwd(cwd, 4096);
-    printf("⚡");
-    printf("%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, cwd);
+
+    // Style 1
+    printf("╔ %s\n", cwd);
+    printf("╚▶ ");
+
+    // Style 2
+    // printf("⚡");
+    // printf("%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, cwd);
+
+    // Style 3
+    // printf("%s ⚡ ", cwd);
+
 }
 /**
  * Determines if the given argument is a shell command
