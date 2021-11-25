@@ -9,14 +9,20 @@
 
 void tests();
 
-int main(int argc, char *argv[]) {
-	// tests();
 
-	char cwd[4096];  // see https://www.google.com/search?q=unix+path+length
+int main(int argc, char *argv[]) {
+	int prompt_style = 0;
+	if (argc > 1) {
+		if (strcmp(argv[1], "--prompt-style") == 0) {
+			prompt_style = atoi(argv[2]);
+		}
+	}
+
+	// tests();
 
 	while (1) {
 		// Print prompt
-		print_prompt();
+		print_prompt(prompt_style);
 
 		// Read in line from STDIN
 		char *input = read_line();

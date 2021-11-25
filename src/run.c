@@ -9,22 +9,30 @@
 #include "term_colors.h"
 
 
-void print_prompt() {
+void print_prompt(int prompt_style) {
     char cwd[4096];
     getcwd(cwd, 4096);
 
-    // Style 1
-    printf("╔ %s\n", cwd);
-    printf("╚▶ ");
+	switch(prompt_style) {
+		case 0:
+		    // Style 1
+		    printf("╔ %s\n", cwd);
+		    printf("╚▶ ");
+		    break;
 
-    // Style 2
-    // printf("⚡");
-    // printf("%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, cwd);
+	    case 1:
+		    // Style 2
+		    printf("⚡");
+		    printf("%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, cwd);
+			break;
 
-    // Style 3
-    // printf("%s ⚡ ", cwd);
-
+		case 2:
+		    // Style 3
+		    printf("%s ⚡ ", cwd);
+			break;
+	}
 }
+
 /**
  * Determines if the given argument is a shell command
  *
