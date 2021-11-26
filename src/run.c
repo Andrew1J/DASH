@@ -193,16 +193,16 @@ int reset_redirs(int stdin, int stdout) {
  * @param args pointer to an array of strings
  * @return 0 if successful, other values on failure
  */
-int do_pipes(char **args) {
+int do_pipes(char *args1, char *args2) {
     FILE *pipein, *pipeout;
     char buffer[4096];
 
-    if ((pipein = popen(args[0], "r")) == NULL) {
+    if ((pipein = popen(args1, "r")) == NULL) {
         perror("popen");
         exit(1);
     }
 
-    if ((pipeout = popen(args[1], "w")) == NULL) {
+    if ((pipeout = popen(args2, "w")) == NULL) {
         perror("popen");
         exit(1);
     }

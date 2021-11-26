@@ -47,21 +47,26 @@ int main(int argc, char *argv[]) {
 				exit(errno);
 			}
 
-			char **args = parse_tokens(commands[i],'|');
+			char **args = parse_tokens(commands[i], '|');
 
-			// Number of Pipes
+			// Split line into two strings by the rightmost pipe
 			int j = 0;
-			while(args[j]) j++;
+			char str[4096] = "";
+			while(args[j+1]) {
+				strcat(str,args[j]);
+				if (args[j+2]) strcat(str," | ");
+				j++;
+			}
 
-			// Handle line with pipes
-			if (j > 1) {
-				int pipes = do_pipes(args);
+			// Handle line with pipes (if theres a pipe j>=1)
+			if (j >= 1) {
+				int pipes = do_pipes(str,args[j]);
 				if (pipes) {  // failed to redirect at one point or another
 					break;  // just stop executing and reprompt
 				}
 			}
 
-			// Handle line without pipes
+			// Handle line without pipes (if there isn't a pipe j=0)
 			else {
 				// parse the redirs
 				args = parse_tokens(args[0],' ');
