@@ -13,6 +13,13 @@ void print_prompt(int prompt_style) {
     char cwd[4096];
     getcwd(cwd, 4096);
 
+    char username[4096];
+    getlogin_r(username, 4096);
+
+    // Getting Hostname
+    char hostname[4096];
+    gethostname(hostname, 4096);
+
 	switch(prompt_style) {
 		case 0:
 		    // Style 1
