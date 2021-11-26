@@ -195,7 +195,7 @@ int reset_redirs(int stdin, int stdout) {
  */
 int do_pipes(char **args) {
     FILE *pipein, *pipeout;
-    char readbuf[100];
+    char buffer[4096];
 
     if ((pipein = popen(args[0], "r")) == NULL) {
         perror("popen");
@@ -207,11 +207,12 @@ int do_pipes(char **args) {
         exit(1);
     }
 
-    while(fgets(readbuf, 100, pipein)) {
-        fputs(readbuf, pipeout);
+    // Get output from pipein stream and direct it into pipeout stream
+    while(fgets(buffer, 4096, pipein)) {
+        fputs(buffer, pipeout);
     }
 
-    /* Close the pipes */
+    // Close the pipes
     pclose(pipein);
     pclose(pipeout);
 	return 0;
