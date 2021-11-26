@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 		// Execute commands
 		int i = 0;
 		while (commands[i]) {
+
 			// duplicate stdin, stdout for later
 			int backup_stdin = dup(STDIN_FILENO);
 			if (backup_stdin < 0) {
@@ -46,29 +47,41 @@ int main(int argc, char *argv[]) {
 				exit(errno);
 			}
 
-			// parse the redirs
-			char **args = parse_tokens(commands[i],' ');
+			char **args = parse_tokens(commands[i],'|');
 
-			int redirs = do_redirs(args);
-			if (redirs) {  // failed to redirect at one point or another
-				break;  // just stop executing and reprompt
+			// Number of Pipes
+			int j = 0;
+			while(args[j]) j++;
+
+			// Handle line with pipes
+			if (j > 1) {
+				int pipes = do_pipes(args);
+				if (pipes) {  // failed to redirect at one point or another
+					break;  // just stop executing and reprompt
+				}
 			}
 
-			int pipes = do_pipes(args);
-			if (pipes) {  // failed to redirect at one point or another
-				break;  // just stop executing and reprompt
-			}
+			// Handle line without pipes
+			else {
+				// parse the redirs
+				args = parse_tokens(args[0],' ');
 
-			if (is_shell_cmd(args)) {
-				do_shell_cmd(args);
-			} else {
-				run_command(args);
-			}
+				int redirs = do_redirs(args);
+				if (redirs) {  // failed to redirect at one point or another
+					break;  // just stop executing and reprompt
+				}
 
-			// done executing, put stdin & stdout back
-			int rst_redir = reset_redirs(backup_stdin, backup_stdout);
-			if (rst_redir) {
-				exit(rst_redir);
+				if (is_shell_cmd(args)) {
+					do_shell_cmd(args);
+				} else {
+					run_command(args);
+				}
+
+				// done executing, put stdin & stdout back
+				int rst_redir = reset_redirs(backup_stdin, backup_stdout);
+				if (rst_redir) {
+					exit(rst_redir);
+				}
 			}
 
 			free(args);

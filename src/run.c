@@ -170,6 +170,7 @@ int do_redirs(char **args) {
  * @param stdin file descriptor to replace stdin
  * @param stdout file descriptor to replace stdout
  * @returns 0 on success, other values on failure
+ * @note change stdin and stdout variable names (reserved keywords)
  */
 int reset_redirs(int stdin, int stdout) {
     int dup2_result_out = dup2(stdout, STDOUT_FILENO);
@@ -191,10 +192,28 @@ int reset_redirs(int stdin, int stdout) {
  *
  * @param args pointer to an array of strings
  * @return 0 if successful, other values on failure
- * @note dup2 should close previously opened files, but it fails silently, so :/
  */
 int do_pipes(char **args) {
-	int i;
+    FILE *pipein, *pipeout;
+    char readbuf[100];
+
+    if ((pipein = popen(args[0], "r")) == NULL) {
+        perror("popen");
+        exit(1);
+    }
+
+    if ((pipeout = popen(args[1], "w")) == NULL) {
+        perror("popen");
+        exit(1);
+    }
+
+    while(fgets(readbuf, 100, pipein)) {
+        fputs(readbuf, pipeout);
+    }
+
+    /* Close the pipes */
+    pclose(pipein);
+    pclose(pipeout);
 	return 0;
 }
 
