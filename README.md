@@ -96,7 +96,7 @@ int reset_redirs(int stdin, int stdout);
  - Resets stdin, stdout to backed up values
  - @param stdin file descriptor to replace stdin
  - @param stdout file descriptor to replace stdout
- - @returns 0 on success, other values on failure
+ - @return 0 on success, other values on failure
 
 int do_pipes(char *args1, char *args2);
  - Takes in an array of arguments and sets up pipes
