@@ -75,17 +75,17 @@ int num_args(char * line, char ch) {
  */
 char * remove_spaces(char * line) {
     // Remove from beginning
-    while (*line==' ' || *line=='\t') {
+    while (*line == ' ' || *line == '\t') {
         line++;
     }
 
     // Remove from end
     char *end = line + strlen(line) - 1;
-    while(end > line && (*end == ' '||*end=='\t')) {
+    while(end > line && (*end == ' '||*end == '\t')) {
         end--;
     }
 
     // Add terminating null
-    *(end+1) = '\0';
+    *(end + 1) = '\0';
     return line;
 }

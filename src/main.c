@@ -52,15 +52,17 @@ int main(int argc, char *argv[]) {
 			// Split line into two strings by the rightmost pipe
 			int j = 0;
 			char str[4096] = "";
-			while(args[j+1]) {
-				strcat(str,args[j]);
-				if (args[j+2]) strcat(str," | ");
+			while (args[j + 1]) {
+				strcat(str, args[j]);
+				
+				if (args[j + 2]) strcat(str," | ");
+
 				j++;
 			}
 
 			// Handle line with pipes (if theres a pipe j>=1)
 			if (j >= 1) {
-				int pipes = do_pipes(str,args[j]);
+				int pipes = do_pipes(str, args[j]);
 				if (pipes) {  // failed to redirect at one point or another
 					break;  // just stop executing and reprompt
 				}
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
 			// Handle line without pipes (if there isn't a pipe j=0)
 			else {
 				// parse the redirs
-				args = parse_tokens(args[0],' ');
+				args = parse_tokens(args[0], ' ');
 
 				int redirs = do_redirs(args);
 				if (redirs) {  // failed to redirect at one point or another
