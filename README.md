@@ -1,6 +1,6 @@
 # ![DASH](https://i.imgur.com/j3yIxXB.gif) 
 (**D**ylan and **A**ndrew's **SH**ell) <br>
-This project is an implementation of a shell in C for Systems. 
+This project is an implementation of a shell in C for Systems Programming. 
 
 ## Getting Started
 
@@ -25,10 +25,11 @@ make
 ## Description
 ### Features Our Shell Implements
 - Implemented trimming spaces and tabs from input
-- Command-line argument to change prompt style
+- Command-line argument to change prompt style (when running binary)
   - Invoke dash with `--prompt-style <style>` where `<style>` is an integer from 0-2, inclusive
   - Defaults to style 0
   - Invalid inputs default to style 0
+- Multipiping + Redirection (behavior mimics that of Bash)
 
 ### Attempted Features
 - 
@@ -103,18 +104,17 @@ int do_pipes(char *args1, char *args2);
  - @return 0 if successful, other values on failure
  
 ```
-***main.c***: (puts everything together and runs shell)
+***main.c***: (puts everything together and runs DASH)
 ```
 int main();
- - Runs shell
+ - Runs the shell
 ```
-### TODO
+### Possible Additional Features TODO
  * Signal Handling
  * Declutter main.c 
- * String Handling
+ * String Handling (echo "hello" => hello)
  * Cooler prompt options! (time date, host, smiley faces, colors)
- * Update this README
- * Improved comments and documentation
- * Implement commands unique to our shell
+ * Improved organization
+ * Implement more commands unique to our shell
     - Prompt selection command (rather than selecting before running)
     - Something like "cowsay"
