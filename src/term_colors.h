@@ -10,4 +10,8 @@
 #define WHT   "\x1B[37m"
 #define RESET "\x1B[0m"
 
+#define BRT "\x1B[1;m"
+#define BGRN "\x1B[1;32m"
+#define BBLU "\x1B[1;34m"
+
 #endif

@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
 	// tests();
 
 	while (1) {
-		// Print prompt
-		print_prompt(prompt_style);
+		// Print prompt w/temp values for style and like bash
+		print_prompt(prompt_style, 0, 0);
 
 		// Read in line from STDIN
 		char *input = read_line();

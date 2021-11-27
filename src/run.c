@@ -8,8 +8,14 @@
 #include "run.h"
 #include "term_colors.h"
 
-
-void print_prompt(int prompt_style) {
+/**
+ * Prints the shell prompt. Choose from 4 styles.
+ * 
+ * @param prompt_style selects prompt style, overridden by @param like_bash
+ * @param prompt_path_colors enables path coloring, overridden by @param like_bash
+ * @param like_bash makes dash look like bash!
+ */
+void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
     char cwd[4096];
     getcwd(cwd, 4096);
 
@@ -19,6 +25,11 @@ void print_prompt(int prompt_style) {
     // Getting Hostname
     char hostname[4096];
     gethostname(hostname, 4096);
+
+    if (like_bash) {
+        prompt_path_colors = 1;
+        prompt_style = 3;
+    }
 
 	switch(prompt_style) {
 		case 0:
@@ -37,6 +48,10 @@ void print_prompt(int prompt_style) {
 		    // Style 3
 		    printf("%s ⚡ ", cwd);
 			break;
+        case 3:
+            // Style 4, like bash
+            printf(BGRN "%s" RESET ":" BBLU "%s" RESET "$ ", hostname, cwd);
+            break;
 	}
 }
 
