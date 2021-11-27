@@ -64,10 +64,11 @@ char * remove_spaces(char * line);
 ***run.c***: (executes commands passed by parse.c)
 ```
 void print_prompt();
- - Takes in an integer and displays corresponding shell prompt
- - @param Integer
- - @return Prints corresponding shell prompt
- 
+ - Prints the shell prompt. Choose from 4 styles. 
+ - @param prompt_style selects prompt style, overridden by @param like_bash
+ - @param prompt_path_colors enables path coloring, overridden by @param like_bash (not enabled yet)
+ - @param like_bash makes dash look like bash! (not enabled yet)
+
 int is_shell_cmd(char **args);
  - Determines if the given argument is a shell command
  - @param args Array of arguments
