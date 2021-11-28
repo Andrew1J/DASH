@@ -27,6 +27,11 @@ int main(int argc, char *argv[]) {
 		// Read in line from STDIN
 		char *input = read_line();
 
+		// Don't do anything on blank inputs
+		if (strlen(input) == 0) {
+			continue;
+		}
+
 		// Parse the commands from input
 		// TODO: will have to trim whitespace later
 		char **commands = parse_tokens(input, ';');
