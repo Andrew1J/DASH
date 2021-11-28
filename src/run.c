@@ -16,14 +16,20 @@
  */
 void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
     char cwd[4096];
-    getcwd(cwd, 4096);
+    getcwd(cwd, sizeof(cwd));
 
     char username[4096];
-    getlogin_r(username, 4096);
+	char *_username = getenv("LOGNAME");
+	if (_username) {  // try getting the username from the environment variable LOGNAME
+		strcpy(username, _username);
+	} else {
+    	getlogin_r(username, sizeof(username));
+	}
+	
 
     // Getting Hostname
     char hostname[4096];
-    gethostname(hostname, 4096);
+    gethostname(hostname, sizeof(hostname));
 
     if (like_bash) {
         prompt_path_colors = 1;
@@ -49,7 +55,7 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
 			break;
         case 3:
             // Style 4, like bash
-            printf(BGRN "%s" RESET ":" BBLU "%s" RESET "$ ", hostname, cwd);
+            printf(BGRN "%s@%s" RESET ":" BBLU "%s" RESET "$ ", username, hostname, cwd);
             break;
 	}
 }
