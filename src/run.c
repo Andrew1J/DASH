@@ -7,10 +7,9 @@
 #include <fcntl.h>
 #include "run.h"
 #include "term_colors.h"
-
 /**
  * Prints the shell prompt. Choose from 4 styles.
- * 
+ *
  * @param prompt_style selects prompt style, overridden by @param like_bash
  * @param prompt_path_colors enables path coloring, overridden by @param like_bash
  * @param like_bash makes dash look like bash!
@@ -34,7 +33,7 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
 	switch(prompt_style) {
 		case 0:
 		    // Style 1
-		    printf("╔ %s\n", cwd);
+		    printf("╔" YEL " %s" RESET "⚡" RED"%s\n" RESET, hostname, cwd);
 		    printf("╚▶ ");
 		    break;
 
@@ -46,7 +45,7 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
 
 		case 2:
 		    // Style 3
-		    printf("%s ⚡ ", cwd);
+		   printf(YEL "%s" RESET ":" RED "%s" RESET "⚡ ", hostname, cwd);
 			break;
         case 3:
             // Style 4, like bash
