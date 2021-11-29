@@ -27,17 +27,16 @@ int main(int argc, char *argv[]) {
 		// Read in line from STDIN
 		char *input = read_line();
 
-		// Don't do anything on blank inputs
-		if (strlen(input) == 0) {
-			continue;
-		}
-
 		// Parse the commands from input
 		char **commands = parse_tokens(input, ';');
 
 		// Execute commands
 		int i = 0;
 		while (commands[i]) {
+			if (strlen(commands[i]) == 0) {  // don't do anything if there's nothing to do
+				i++;
+				continue;
+			}
 
 			// duplicate stdin, stdout for later
 			int backup_stdin = dup(STDIN_FILENO);
