@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	while (1) {
+	while (!feof(stdin)) {
 		// Print prompt w/temp values for style and like bash
 		print_prompt(prompt_style, 0, 0);
 
@@ -102,6 +102,8 @@ int main(int argc, char *argv[]) {
 		free(input);
 		free(commands);
 	}
+
+	printf("\n");
 
 	return 0;
 }
