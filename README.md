@@ -22,6 +22,11 @@ make
 
 `make run` or `./bin/dash`
 
+* Exit DASH
+``` 
+exit
+```
+
 ## Description
 ### Features Our Shell Implements
 - Implemented trimming spaces and tabs from input
