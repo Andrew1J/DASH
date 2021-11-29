@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <errno.h>
 #include "parse.h"
 #include "run.h"
 #include "term_colors.h"
 
+static void sig_handler(int signo);
 
 int main(int argc, char *argv[]) {
+	signal(SIGINT, sig_handler);
+
 	int prompt_style = 0;
 	if (argc > 1) {
 		if (strcmp(argv[1], "--prompt-style") == 0) {
@@ -100,4 +104,10 @@ int main(int argc, char *argv[]) {
 	}
 
 	return 0;
+}
+
+static void sig_handler(int signo) {
+	if (signo == SIGINT) {  // catch SIGINT (Ctrl-C) and do nothing
+		return;
+	}
 }
