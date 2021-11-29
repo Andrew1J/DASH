@@ -39,7 +39,7 @@ exit
 ### Attempted Features
 -
 ### Bugs
-- DON'T USE TABS :)
+- Tabs might behave weirdly. 
 
 ### Function Headers
 ***parse.c***: (parses input to be run by run.c)
