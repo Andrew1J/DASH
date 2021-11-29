@@ -7,8 +7,6 @@
 #include "run.h"
 #include "term_colors.h"
 
-void tests();
-
 
 int main(int argc, char *argv[]) {
 	int prompt_style = 0;
@@ -18,8 +16,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	// tests();
-
 	while (1) {
 		// Print prompt w/temp values for style and like bash
 		print_prompt(prompt_style, 0, 0);
@@ -27,8 +23,12 @@ int main(int argc, char *argv[]) {
 		// Read in line from STDIN
 		char *input = read_line();
 
+		// Don't do anything on blank inputs
+		if (strlen(input) == 0) {
+			continue;
+		}
+
 		// Parse the commands from input
-		// TODO: will have to trim whitespace later
 		char **commands = parse_tokens(input, ';');
 
 		// Execute commands

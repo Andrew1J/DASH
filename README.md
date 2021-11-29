@@ -1,6 +1,6 @@
 # ![DASH](https://i.imgur.com/j3yIxXB.gif)
 (**D**ylan and **A**ndrew's **SH**ell) <br>
-This project is an implementation of a shell in C for Systems.
+This project is an implementation of a shell in C for Systems Programming.
 
 ## Getting Started
 
@@ -29,6 +29,7 @@ make
   - Invoke dash with `--prompt-style <style>` where `<style>` is an integer from 0-3, inclusive
   - Defaults to style 0
   - Invalid inputs default to style 0
+- Multipiping + Redirection (behavior mimics that of Bash)
 
 ### Attempted Features
 -
@@ -37,7 +38,7 @@ make
 
 ### Function Headers
 ***parse.c***: (parses input to be run by run.c)
-```
+```C
 char * read_line();
  - Reads in line from STDIN and removes trailing newline
  - @param STDIN
@@ -58,11 +59,12 @@ int num_args(char * line, char ch);
 char * remove_spaces(char * line);
  - Takes in a line and trims whitespace and tabs before/after line
  - @param line pointer to a string
+ - @return Returns a pointer to the trimmed line
 
 ```
 
 ***run.c***: (executes commands passed by parse.c)
-```
+```C
 void print_prompt();
  - Prints the shell prompt. Choose from 4 styles.
  - @param prompt_style selects prompt style, overridden by @param like_bash
@@ -94,8 +96,7 @@ int reset_redirs(int stdin, int stdout);
  - Resets stdin, stdout to backed up values
  - @param stdin file descriptor to replace stdin
  - @param stdout file descriptor to replace stdout
- - @returns 0 on success, other values on failure
- - @note change stdin and stdout variable names (reserved keywords)
+ - @return 0 on success, other values on failure
 
 int do_pipes(char *args1, char *args2);
  - Takes in an array of arguments and sets up pipes
@@ -103,18 +104,17 @@ int do_pipes(char *args1, char *args2);
  - @return 0 if successful, other values on failure
 
 ```
-***main.c***: (puts everything together and runs shell)
-```
+***main.c***: (puts everything together and runs DASH)
+```C
 int main();
- - Runs shell
+ - Runs the shell
 ```
-### TODO
+### Possible Additional Features TODO
  * Signal Handling
  * Declutter main.c
- * String Handling
+ * String Handling (echo "hello" => hello)
  * Cooler prompt options! (time date, host, smiley faces, colors)
- * Update this README
- * Improved comments and documentation
- * Implement commands unique to our shell
+ * Improved organization
+ * Implement more commands unique to our shell
     - Prompt selection command (rather than selecting before running)
     - Something like "cowsay"
