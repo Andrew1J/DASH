@@ -46,7 +46,7 @@ exit
 - The maximum length of the hostname is 4096 characters, but the system's limit is likely lower
 
 ### Bugs
-- Tabs might behave weirdly with some prompts. 
+- Tab + baskspace might behave weirdly with some prompts, but otherwise should work fine.
 
 ### Function Headers
 ***parse.c***: (parses input to be run by run.c)
