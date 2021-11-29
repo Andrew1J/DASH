@@ -113,6 +113,10 @@ int do_pipes(char *args1, char *args2);
 ```C
 int main();
  - Runs the shell
+ 
+static void sig_handler(int signo);
+ - Handles SIGINT signals (does nothing basically)
+ - @param signo signal received
 ```
 ### Possible Additional Features TODO
  * Signal Handling
