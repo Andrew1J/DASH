@@ -41,6 +41,9 @@ exit
 
 ### Limitations
 - The maximum input length per line is 498 characters
+- The maximum length of the current directory is 4096 characters, but it should be the limit for UNIX complient systems anyway
+- The maximum length of the username is 4096 characters, but the system's limit is likely lower
+- The maximum length of the hostname is 4096 characters, but the system's limit is likely lower
 
 ### Bugs
 - Tabs might behave weirdly with some prompts. 
