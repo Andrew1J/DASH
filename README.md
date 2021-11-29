@@ -38,6 +38,10 @@ exit
 
 ### Attempted Features
 -
+
+### Limitations
+- The maximum input length per line is 498 characters
+
 ### Bugs
 - Tabs might behave weirdly with some prompts. 
 
