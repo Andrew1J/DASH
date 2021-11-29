@@ -25,7 +25,7 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
 	} else {
     	getlogin_r(username, sizeof(username));
 	}
-	
+
 
     // Getting Hostname
     char hostname[4096];
@@ -58,6 +58,8 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
             printf(BGRN "%s@%s" RESET ":" BBLU "%s" RESET "$ ", username, hostname, cwd);
             break;
 	}
+
+    fflush(stdout);
 }
 
 /**
