@@ -138,7 +138,7 @@ static void sig_handler(int signo);
  - @param signo signal received
 ```
 ### Possible Additional Features TODO
- * Signal Handling
+ * Better Signal Handling
  * Declutter main.c
  * String Handling (echo "hello" => hello)
  * Cooler prompt options! (time date, host, smiley faces, colors)
