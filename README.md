@@ -36,6 +36,10 @@ exit
   - Invalid inputs default to style 0
 - Multipiping + Redirection (behavior mimics that of Bash)
 
+### Good things to know (quirks)
+- Inputs like `;;;;;;;` evaluate to nothing, and execute nothing
+  - In bash, this would give syntax errors
+
 ### Attempted Features
 -
 
