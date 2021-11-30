@@ -1,10 +1,8 @@
 # ![DASH](https://i.imgur.com/j3yIxXB.gif)
 (**D**ylan and **A**ndrew's **SH**ell) <br>
-This project is an implementation of a shell in C for Systems Programming.
+This project is an implementation of a shell in C for Systems level programming.
 
 ## Getting Started
-
-Launch Codes
 
 * Clone the Repository
 ```
@@ -18,9 +16,9 @@ cd DASH
 ```
 make
 ```
-* Run DASH using make, or by running the binary directly
+* Run DASH using make, or by running the binary directly (with any arguments you want)
 
-`make run` or `./bin/dash`
+`make run` or `./bin/dash` or `./bin/dash --prompt-style 3`
 
 * Exit DASH
 ``` 
@@ -29,19 +27,26 @@ exit
 
 ## Description
 ### Features Our Shell Implements
-- Implemented trimming spaces and tabs from input
-- Command-line argument to change prompt style
+- Execute commands with arguments (duh)
+- Multiple commands in one line using `;`
+- Redirection of stdin and stdout
+  - Behavior mimics that of bash
+  - Implements `<`, `>`, `>>`
+- Piping and multipiping
+
+### Good things to know (quirks and new features)
+- Change prompt styling using a command-line argument on invocation of dash
   - Invoke dash with `--prompt-style <style>` where `<style>` is an integer from 0-3, inclusive
   - Defaults to style 0
   - Invalid inputs default to style 0
-- Multipiping + Redirection (behavior mimics that of Bash)
-
-### Good things to know (quirks)
+  - Example: `dash --prompt-style 3`
+  - Styles
+    - Style 0: Weird style with username, hostname, and cwd on a separate line
+    - Style 1: Cool style with colorful triangles before user input
+    - Style 2: Colorful username, hostname, and cwd, and a lightning bolt before user input
+    - Style 3: Mimics bash, very realistic
 - Inputs like `;;;;;;;` evaluate to nothing, and execute nothing
   - In bash, this would give syntax errors
-
-### Attempted Features
--
 
 ### Limitations
 - The maximum input length per line is 498 characters
@@ -50,7 +55,7 @@ exit
 - The maximum length of the hostname is 4096 characters, but the system's limit is likely lower
 
 ### Bugs
-- Tab + baskspace might behave weirdly with some prompts, but otherwise should work fine.
+- Tabbing and then hitting backspace on an empty input may behave weirdly, but we've only observed it to be a visual glitch and it likely won't affect anything else
 
 ### Function Headers
 ***parse.c***: (parses input to be run by run.c)
