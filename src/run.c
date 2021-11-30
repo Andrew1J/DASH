@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include "run.h"
 #include "term_colors.h"
+
+
 /**
  * Prints the shell prompt. Choose from 4 styles.
  *
@@ -39,19 +41,19 @@ void print_prompt(int prompt_style, int prompt_path_colors, int like_bash) {
 	switch(prompt_style) {
 		case 0:
 		    // Style 1
-		    printf("╔" YEL " %s" RESET "⚡" RED"%s\n" RESET, hostname, cwd);
+		    printf("╔═" YEL " %s@%s" RESET "⚡" RED"%s\n" RESET, username, hostname, cwd);
 		    printf("╚▶ ");
 		    break;
 
 	    case 1:
 		    // Style 2
-		    printf("⚡");
-		    printf("%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, cwd);
+		    printf("⚡ ");
+		    printf("%s@%s:%s" RED " ▶" RESET GRN "▶" RESET BLU "▶ " RESET, username, hostname, cwd);
 			break;
 
 		case 2:
 		    // Style 3
-		   printf(YEL "%s" RESET ":" RED "%s" RESET "⚡ ", hostname, cwd);
+			printf(YEL "%s@%s" RESET ":" RED "%s" RESET "⚡ ", username, hostname, cwd);
 			break;
         case 3:
             // Style 4, like bash
