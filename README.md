@@ -58,6 +58,7 @@ exit
 
 ### Bugs
 - Tabbing and then hitting backspace on an empty input may behave weirdly, but we've only observed it to be a visual glitch and it likely won't affect anything else
+- Prompt may print weirdly if you redirect commands into a program. 
 
 ### Function Headers
 ***parse.c***: (parses input to be run by run.c)
