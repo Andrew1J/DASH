@@ -34,6 +34,7 @@ exit
 - Redirection of stdin and stdout
   - Behavior mimics that of bash
   - Implements `<`, `>`, `>>`
+  - Redirection operations __must__ be after the command and its arguments
 - Piping and multipiping
 
 ### Good things to know (quirks and new features)
@@ -49,8 +50,12 @@ exit
     - Style 3: Mimics bash, very realistic
 - Inputs like `;;;;;;;` evaluate to nothing, and execute nothing
   - In bash, this would give syntax errors
+- Quotation marks to make strings is not implemented
+  - `"hello there"` won't make a string, it'll be interpreted separately as `"hello` and `there"`
 
 ### Limitations
+- Windows is __not__ supported, but that should be obvious as this is a linux systems programming course
+- Redirection operations __must__ be after the command and its arguments
 - The maximum input length per line is 498 characters
 - The maximum length of the current directory is 4096 characters, but it should be the limit for UNIX complient systems anyway
 - The maximum length of the username is 4096 characters, but the system's limit is likely lower
