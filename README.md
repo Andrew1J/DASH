@@ -2,6 +2,8 @@
 (**D**ylan and **A**ndrew's **SH**ell) <br>
 This project is an implementation of a shell in C for Systems level programming.
 
+<sup><sub>Disclaimer: this project's name and it's potential similarities to other shells of similar naming is entirely coincidental. Dylan was an idiot and forgot to check if the name was already used by another shell and now we're too lazy to change it. Idiot.</sub></sup>
+
 ## Getting Started
 
 * Clone the Repository
